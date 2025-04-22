@@ -1,5 +1,6 @@
 package com.example.examreview
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.EditText
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 class AddHabitFragment : Fragment(){
 
@@ -22,7 +24,11 @@ class AddHabitFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_add_habit,container,false)
+        return inflater.inflate(R.layout.fragment_add_habit, container, false)
+    }
+
+    @SuppressLint("DefaultLocale")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         habitNameEditText = view.findViewById(R.id.habitNameEditText)
         habitGoalEditText = view.findViewById(R.id.habitGoalEditText)
@@ -32,17 +38,22 @@ class AddHabitFragment : Fragment(){
         saveButton.setOnClickListener{
             val name = habitNameEditText.text.toString()
             val goal = habitGoalEditText.text.toString()
-            val time = "${timePicker.hour}:${timePicker.minute}"
+            val time = String.format("%02d:%02d", timePicker.hour, timePicker.minute)
 
-            if (name.isNotEmpty() && goal.isNotEmpty()){
-                Toast.makeText(requireContext(), "Habit Saved: $name", Toast.LENGTH_SHORT).show()
 
-            }else{
+            if (name.isNotEmpty() && goal.isNotEmpty()) {
+                val habit = Habit(name, time, goal)
+                val habits = loadHabitsFromFile(requireContext()).toMutableList()
+                habits.add(habit)
+                saveHabitsToFile(requireContext(), habits)
+                Toast.makeText(requireContext(), "Habit saved!", Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+            } else {
                 Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
-
             }
+
         }
-            return view
+
     }
 
 }

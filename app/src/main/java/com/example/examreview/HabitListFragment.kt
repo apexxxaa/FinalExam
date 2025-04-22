@@ -26,31 +26,35 @@ class HabitListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = habitAdapter
 
+        habitAdapter.submitList(loadHabitsFromFile(requireContext()))
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val buttonAddHabit = view.findViewById<Button>(R.id.buttonAddHabit)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val defaultButton = view.findViewById<Button>(R.id.btnLoadDefaults)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         habitAdapter = HabitAdapter()
         recyclerView.adapter = habitAdapter
 
-
+        habitAdapter.submitList(loadHabitsFromFile(requireContext()))
 
         buttonAddHabit.setOnClickListener {
             findNavController().navigate(R.id.action_habitListFragment_to_addHabitFragment)
         }
 
-
-        val habits = listOf(
-            Habit("Meditation", "10 minutes daily", "7:00 AM"),
-            Habit("Workout", "30 minutes daily", "6:00 AM"),
-            Habit("Reading", "15 minutes daily", "9:00 PM")
-        )
-        habitAdapter.submitList(habits)
-
+        defaultButton.setOnClickListener {
+            val defaultHabits = listOf(
+                Habit("Drink Water", "08:00", "8 cups/day"),
+                Habit("Read Book", "21:00", "30 mins/day"),
+                Habit("Sleep", "23:30", "6 Hours")
+            )
+            saveHabitsToFile(requireContext(), defaultHabits)
+            habitAdapter.submitList(defaultHabits)
+        }
     }
 
 

@@ -17,6 +17,13 @@
         android:layout_marginTop="50dp"
         android:text="Add Habit" />
 
+    <Button
+        android:id="@+id/btnLoadDefaults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Load Defaults" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
