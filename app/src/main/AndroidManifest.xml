@@ -28,6 +28,11 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".services.HabitTimerService"
+            android:foregroundServiceType="dataSync"
+            android:exported="false" />
+
         <receiver android:name=".receivers.BatteryReceiver"
             android:exported="true">
             <intent-filter>

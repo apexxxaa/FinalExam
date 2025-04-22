@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.examreview.receivers.BatteryReceiver
+import com.example.examreview.services.HabitTimerService
 
 class HabitListFragment : Fragment() {
 
@@ -54,8 +56,12 @@ class HabitListFragment : Fragment() {
         }
 
         //add this to show sync
-        val intent = Intent(Intent.ACTION_BATTERY_LOW)
-        BatteryReceiver().onReceive(requireContext(), intent)
+      //  val intent = Intent(Intent.ACTION_BATTERY_LOW)
+       // BatteryReceiver().onReceive(requireContext(), intent)
+
+        // this is for foreground service meditation
+       //val serviceIntent = Intent(requireContext(), HabitTimerService::class.java)
+       // ContextCompat.startForegroundService(requireContext(), serviceIntent)
 
 
         defaultButton.setOnClickListener {
