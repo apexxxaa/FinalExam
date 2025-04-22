@@ -8,6 +8,18 @@
         android:id="@+id/habitListFragment"
         android:name="com.example.examreview.HabitListFragment"
         android:label="Habit List"
-        tools:layout="@layout/fragment_habit_list" />
+        tools:layout="@layout/fragment_habit_list" >
 
+        <!-- ADD THIS inside HabitListFragment -->
+
+        <action
+            android:id="@+id/action_habitListFragment_to_addHabitFragment"
+            app:destination="@id/addHabitFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addHabitFragment"
+        android:name="com.example.examreview.AddHabitFragment"
+        android:label="Add Habit"
+        tools:layout="@layout/fragment_add_habit" />
 </navigation>

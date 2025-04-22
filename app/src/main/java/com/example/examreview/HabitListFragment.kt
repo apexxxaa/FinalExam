@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class HabitListFragment : Fragment() {
 
+    private lateinit var recyclerView: RecyclerView
     private lateinit var habitAdapter: HabitAdapter
 
     override fun onCreateView(
@@ -17,12 +20,29 @@ class HabitListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_habit_list, container, false  )
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val view = inflater.inflate(R.layout.fragment_habit_list, container, false)
+        recyclerView = view.findViewById(R.id.recyclerView)
         habitAdapter = HabitAdapter()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = habitAdapter
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val buttonAddHabit = view.findViewById<Button>(R.id.buttonAddHabit)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        habitAdapter = HabitAdapter()
+        recyclerView.adapter = habitAdapter
+
+
+
+        buttonAddHabit.setOnClickListener {
+            findNavController().navigate(R.id.action_habitListFragment_to_addHabitFragment)
+        }
+
 
         val habits = listOf(
             Habit("Meditation", "10 minutes daily", "7:00 AM"),
@@ -31,6 +51,10 @@ class HabitListFragment : Fragment() {
         )
         habitAdapter.submitList(habits)
 
-        return view
     }
-}
+
+
+
+
+
+    }

@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
+    <!-- Correctly positioned Button -->
+
+    <!-- RecyclerView BELOW the button -->
+
+    <Button
+        android:id="@+id/buttonAddHabit"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="50dp"
+        android:text="Add Habit" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_height="400dp"
+        android:layout_marginTop="30dp"/>
+</LinearLayout>
