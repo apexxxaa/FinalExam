@@ -35,6 +35,7 @@ class HabitListFragment : Fragment() {
         val buttonAddHabit = view.findViewById<Button>(R.id.buttonAddHabit)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val defaultButton = view.findViewById<Button>(R.id.btnLoadDefaults)
+        val quoteButton = view.findViewById<Button>(R.id.btnShowQuote)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         habitAdapter = HabitAdapter()
@@ -44,6 +45,10 @@ class HabitListFragment : Fragment() {
 
         buttonAddHabit.setOnClickListener {
             findNavController().navigate(R.id.action_habitListFragment_to_addHabitFragment)
+        }
+
+        quoteButton.setOnClickListener {
+            findNavController().navigate(R.id.action_habitListFragment_to_quoteFragment)
         }
 
         defaultButton.setOnClickListener {
