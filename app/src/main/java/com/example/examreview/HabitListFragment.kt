@@ -1,5 +1,6 @@
 package com.example.examreview
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.examreview.receivers.BatteryReceiver
 
 class HabitListFragment : Fragment() {
 
@@ -50,6 +52,11 @@ class HabitListFragment : Fragment() {
         quoteButton.setOnClickListener {
             findNavController().navigate(R.id.action_habitListFragment_to_quoteFragment)
         }
+
+        //add this to show sync
+        val intent = Intent(Intent.ACTION_BATTERY_LOW)
+        BatteryReceiver().onReceive(requireContext(), intent)
+
 
         defaultButton.setOnClickListener {
             val defaultHabits = listOf(
